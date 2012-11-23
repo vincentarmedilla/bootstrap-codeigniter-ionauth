@@ -1,0 +1,16 @@
+!.gitignore
+
+
+##### Global files
+
+*.zip
+.svn
+.DS_Store
+thumbs.db
+*nbproject*
+
+##### Codeigniter files
+*system/*
+*/config/development
+/.htaccess
+/index.php
