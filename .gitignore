@@ -10,7 +10,6 @@ thumbs.db
 *nbproject*
 
 ##### Codeigniter files
-*system/*
 */config/development
 /.htaccess
 /index.php
