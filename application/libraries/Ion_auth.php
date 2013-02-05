@@ -59,9 +59,18 @@ class Ion_auth
 	{
 		$this->load->config('ion_auth', TRUE);
 		$this->load->library('email');
-		$this->load->library('session');
 		$this->lang->load('ion_auth');
 		$this->load->helper('cookie');
+
+		//Load the session, CI2 as a library, CI3 uses it as a driver
+		if (substr(CI_VERSION, 0, 1) == '2')
+		{
+			$this->load->library('session');
+		}
+		else
+		{
+			$this->load->driver('session');
+		}
 
 		// Load IonAuth MongoDB model if it's set to use MongoDB,
 		// We assign the model object to "ion_auth_model" variable.
@@ -386,9 +395,14 @@ class Ion_auth
 			delete_cookie('remember_code');
 		}
 
-		//Recreate the session
+		//Destroy the session
 		$this->session->sess_destroy();
-		$this->session->sess_create();
+
+		//Recreate the session
+		if (substr(CI_VERSION, 0, 1) == '2')
+		{
+			$this->session->sess_create();
+		}
 
 		$this->set_message('logout_successful');
 		return TRUE;
@@ -408,6 +422,23 @@ class Ion_auth
 
 		return (bool) $this->session->userdata($identity);
 	}
+
+	/**
+	 * logged_in
+	 *
+	 * @return integer
+	 * @author jrmadsen67
+	 **/
+	public function get_user_id()
+	{
+		$user_id = $this->session->userdata('user_id');
+		if (!empty($user_id))
+		{
+			return $user_id;
+		}
+		return null;
+	}
+
 
 	/**
 	 * is_admin
@@ -433,14 +464,14 @@ class Ion_auth
 	public function in_group($check_group, $id=false)
 	{
 		$this->ion_auth_model->trigger_events('in_group');
-		
+
 		$id || $id = $this->session->userdata('user_id');
 
 		if (!is_array($check_group))
 		{
 			$check_group = array($check_group);
 		}
-		
+
 		if (isset($this->_cache_user_in_group[$id]))
 		{
 			$groups_array = $this->_cache_user_in_group[$id];
@@ -467,5 +498,5 @@ class Ion_auth
 
 		return FALSE;
 	}
-	
+
 }
