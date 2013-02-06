@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 /**
  * CodeIgniter
  *
@@ -21,26 +21,33 @@
  * @copyright	Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
  * @license		http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
  * @link		http://codeigniter.com
- * @since		Version 2.0
+ * @since		Version 1.0
  * @filesource
  */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-/*
-| -------------------------------------------------------------------------
-| Memcached settings
-| -------------------------------------------------------------------------
-| Your Memcached servers can be specified below.
-|
-|	See: http://codeigniter.com/user_guide/libraries/caching.html#memcached
-|
-*/
-$config = array(
-	'default' => array(
-		'hostname' => '127.0.0.1',
-		'port'     => '11211',
-		'weight'   => '1',
-	),
-);
+class Welcome extends CI_Controller {
 
-/* End of file memcached.php */
-/* Location: ./application/config/memcached.php */
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function index()
+	{
+		$this->load->view('welcome_message');
+	}
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */
