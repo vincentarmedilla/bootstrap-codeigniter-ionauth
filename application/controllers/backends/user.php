@@ -11,4 +11,16 @@ class User extends MY_Controller {
         $this->render();
     }
 
+    function register() {
+        
+    }
+
+    function edit() {
+        
+    }
+
+    function delete() {
+        
+    }
+
 }

@@ -430,7 +430,7 @@ class CI_Upload {
 			}
 			else
 			{
-				// An extension was provided, lets have it!
+				// An extension was provided, let's have it!
 				$this->file_ext	= $this->get_extension($this->_file_name_override);
 			}
 
@@ -1050,7 +1050,7 @@ class CI_Upload {
 			// <a, <body, <head, <html, <img, <plaintext, <pre, <script, <table, <title
 			// title is basically just in SVG, but we filter it anyhow
 
-			// if its an image or no "triggers" detected in the first 256 bytes - we're good
+			// if it's an image or no "triggers" detected in the first 256 bytes - we're good
 			return ! preg_match('/<(a|body|head|html|img|plaintext|pre|script|table|title)[\s>]/i', $opening_bytes);
 		}
 
@@ -1212,7 +1212,7 @@ class CI_Upload {
 		 * Notes:
 		 *	- the DIRECTORY_SEPARATOR comparison ensures that we're not on a Windows system
 		 *	- many system admins would disable the exec(), shell_exec(), popen() and similar functions
-		 *	  due to security concerns, hence the function_exists() checks
+		 *	  due to security concerns, hence the function_usable() checks
 		 */
 		if (DIRECTORY_SEPARATOR !== '\\')
 		{
@@ -1223,7 +1223,7 @@ class CI_Upload {
 			if (function_usable('exec'))
 			{
 				/* This might look confusing, as $mime is being populated with all of the output when set in the second parameter.
-				 * However, we only neeed the last line, which is the actual return value of exec(), and as such - it overwrites
+				 * However, we only need the last line, which is the actual return value of exec(), and as such - it overwrites
 				 * anything that could already be set for $mime previously. This effectively makes the second parameter a dummy
 				 * value, which is only put to allow us to get the return status code.
 				 */
